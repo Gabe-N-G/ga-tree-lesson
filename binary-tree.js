@@ -102,6 +102,20 @@ class BinaryTree {
     height(node = this.root){
         // calculate the maximum amount of nodes in any one path from the given node
         // if not given a specific node, default to using the root node
+        let counter = 0
+
+        //similar to size, but we are using seperate counters for left/right then evaluating the largest in the counter.
+        //defaulting the current height to be cause if there's any traversal it would start at 1, and when you reach null it wont add the second 1.
+        const checker = (node, currentH = 1) => {
+            if (node) {
+                counter =  Math.max(counter, currentH)
+                checker(node.left, currentH++)
+                checker(node.right, currentH++)
+            }
+        }
+        checker(node)
+        return counter
+
     }
     isBalanced(node){
         // return true or false based on whether the sub-tree starting at the given node is balanced
