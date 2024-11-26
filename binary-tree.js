@@ -14,15 +14,42 @@ class BinaryTree {
     }
     insert(data){
        //how to create a new binary node (class is on top)
-        let node = new BinaryNode(Data)
+        let node = new BinaryNode(data)
         // add a new Node to the tree, with data as the Node's data
-        
         // if there is no root/items in tree, place 
         if (!this.root){ 
-            this.root = node
+            return this.root = node
         }
         // if the data is already in the tree, do not insert it
         // to find the next empty place to put in the node, we use a recursive depth first search.
+        // aka traversing
+        let walker = this.root
+        let direction = ""
+        //RECURSIVE LOOP INCOMING
+        while (true){
+            // if the data is already there, get the hell out you're done.
+            if (walker.data === data) return;
+            // writing out the solution code in the long format.
+            if(data < walker.data){
+                // binary trees are sorted less than left
+                direction = 'left'
+            } else if (data > walker.data) {
+                // greater than right
+                direction = 'right'
+            }
+            
+            //now that we have the direction of where the data should be in, replace the data if it is empty.
+            if (!walker[direction]){
+                return (walker[direction]) = node
+            } else {
+                // if not keep digging
+                walker = walker[direction]
+            }
+
+
+
+
+        }
 
 
 
