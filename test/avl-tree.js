@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { Node, AVLTree } = require('../AVLTree');
+const { Node, AVLTree } = require('../avl-tree.js');
 
 describe('Node', ()=>{
     it('should initialize with null left and right pointers and 1 height', ()=>{

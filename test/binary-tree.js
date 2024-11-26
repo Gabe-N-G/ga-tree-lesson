@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { BinaryNode, BinaryTree } = require('../binaryTree');
+const { BinaryNode, BinaryTree } = require('../binary-tree.js');
 
 describe('BinaryNode', ()=>{
     it('should initialize with null left and right pointers', ()=>{
