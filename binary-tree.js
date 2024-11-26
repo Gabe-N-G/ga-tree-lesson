@@ -47,11 +47,15 @@ class BinaryTree {
         }
     }
     search(val){
-        
+        // search the Tree for a node with the given value
+        // if the node exists, return true
+        // if the node doesn't exist, return false
+
+
+        // well if theres no tree then it's not gonna work, right?
         if (!this.root) return false;
 
         let walker = this.root
-
         while (walker){
             // if the node exists, return true
             if (walker.data === val) return true
@@ -66,19 +70,36 @@ class BinaryTree {
         }
         // loop exits if it keeps going left/right and hits a null value and so walker === null at that point
         return false
-
-
-        // search the Tree for a node with the given value
-        // if the node exists, return true
-        // if the node doesn't exist, return false
     }
     size(node){
-        // calculate the number of nodes in the tree, starting from the given node
+        // calculate the number of nodes in the tree, starting from the given node.
+        // THIS IS CALCULATING THE TOTAL NODES, NOT THE DEPTH
+        let count = 0
+
+        const counter = node =>{
+            if (node) {
+                count++
+                counter(node.left) //recursively calling the counter on the left node updating the count
+                counter(node.right) //same with right
+            }
+        }        
+
+        counter(node)
+        return count //somehow have to do this here instead of part of counter? (wish I could rewrite it)
     }
     getMax(){
         // return the maximum value stored in the tree
+
+        // YOOOOOOOOOOOOOOOOO GOT IT WITHOUT LOOKING IT UP
+        let walker = this.root
+        let max
+        while (walker){
+            max = walker.data
+            walker = walker.right
+        }
+        return max //since max is definied before reassigning walker, it will get the previous max before walker turns into null, breaking the loop and returning what max is.
     }
-    height(node){
+    height(node = this.root){
         // calculate the maximum amount of nodes in any one path from the given node
         // if not given a specific node, default to using the root node
     }
