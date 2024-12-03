@@ -5,6 +5,15 @@ class BinaryNode {
        this.right = null
     // a node has data, left, and right pointers
     // left and right are intialized as null
+
+    /*
+        creates:
+        {
+        data : data (passed in constructor)
+        left: null
+        right: null
+        }
+    */
     }
 }
 class BinaryTree {
@@ -21,11 +30,10 @@ class BinaryTree {
             return this.root = node
         }
         // if the data is already in the tree, do not insert it
-        // to find the next empty place to put in the node, we use a recursive depth first search.
-        // aka traversing
+        // to find the next empty place to put in the node we traverse the tree.
+        // you can break out of while anb traditional for loops. Cannot break for each or maps
         let walker = this.root
         let direction = ""
-        //RECURSIVE LOOP INCOMING
         while (true){
             // if the data is already there, get the hell out you're done.
             if (walker.data === data) return;
@@ -38,11 +46,12 @@ class BinaryTree {
                 direction = 'right'
             }
             //now that we have the direction of where the data should be in, replace the data if it is empty.
-            if (!walker[direction]){
+            if (!walker[direction]){          
                 return (walker[direction]) = node
             } else {
                 // if not keep digging
                 walker = walker[direction]
+                //the while(true) starts the loop over again.
             }
         }
     }
@@ -53,6 +62,7 @@ class BinaryTree {
 
 
         // well if theres no tree then it's not gonna work, right?
+        // known as edge case. 
         if (!this.root) return false;
 
         let walker = this.root
@@ -102,17 +112,26 @@ class BinaryTree {
     height(node = this.root){
         // calculate the maximum amount of nodes in any one path from the given node
         // if not given a specific node, default to using the root node
-        let counter = 0
 
         //similar to size, but we are using seperate counters for left/right then evaluating the largest in the counter.
         //defaulting the current height to be cause if there's any traversal it would start at 1, and when you reach null it wont add the second 1.
+        
+        //RECURSIVE LOOP INCOMING
+
+        let counter = 0
+
         const checker = (node, currentH = 1) => {
             if (node) {
+                //always gets the greater of the two items since that's the lowest point.
                 counter =  Math.max(counter, currentH)
                 checker(node.left, currentH++)
                 checker(node.right, currentH++)
+                //eventually left/right will be null and break loop.
+                //at this point the counter would hold the greatest number before the loop broke.
             }
         }
+
+        //lets actually call the checker!
         checker(node)
         return counter
 
