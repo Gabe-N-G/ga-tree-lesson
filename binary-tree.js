@@ -140,6 +140,32 @@ class BinaryTree {
         // return true or false based on whether the sub-tree starting at the given node is balanced
         // A tree is imbalanced if the height of one branch exceeds the other side by more than one level
         // A tree is balanced if all branches end within one level of each other.
+
+        let balance = true // is balanced necessary here?
+
+        const checkBal = node => {
+            //this checks the heights of all branches on the left and all branches on the right and returns them.
+            let leftH = this.height(node.left)
+            let rightH = this.height(node.right)
+            //math.abs returns absolute value (always positive)
+            return Math.abs(leftH - rightH) >= 1
+            //if value isn't 0, return true. true is unbalanced ironically.
+        }
+
+        //method to keep checking until it's imbalanced.
+
+        const travCheck =  walker =>{
+            if (walker) {
+                // we can exit out and give false whenever found false
+                if (!checkBal(walker)) return balance = false
+                // unless keep going.
+                travCheck(walker.left)
+                travCheck(walker.right)
+            }
+        }
+        travCheck(node)
+        //return the result
+        return balance
     }
 }
 
